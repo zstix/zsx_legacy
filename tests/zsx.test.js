@@ -17,7 +17,8 @@ const renderTree = data => {
   const tree = zsx(data);
 
   ReactDOM.render(tree, root);
-  return { root };
+  const html = root.innerHTML;
+  return { root, html };
 };
 
 describe("invalid arguments", () => {
@@ -53,8 +54,8 @@ describe("invalid arguments", () => {
 
 describe("one argument", () => {
   test("string", () => {
-    const { root } = renderTree(["hello"]);
-    expect(root.innerHTML).toBe("hello");
+    const { html } = renderTree(["hello"]);
+    expect(html).toBe("hello");
   });
 
   test.todo("child node");
@@ -63,25 +64,25 @@ describe("one argument", () => {
 
 describe("two arguments", () => {
   test("tag and text", () => {
-    const { root } = renderTree(["p", "hello"]);
-    expect(root.innerHTML).toBe("<p>hello</p>");
+    const { html } = renderTree(["p", "hello"]);
+    expect(html).toBe("<p>hello</p>");
   });
 
   test("tag and properties", () => {
-    const { root } = renderTree(["div", { className: "bar" }]);
-    expect(root.innerHTML).toBe('<div class="bar"></div>');
+    const { html } = renderTree(["div", { className: "bar" }]);
+    expect(html).toBe('<div class="bar"></div>');
   });
 
   test("tag and child", () => {
-    const { root } = renderTree(["div", ["p", "hello"]]);
-    expect(root.innerHTML).toBe("<div><p>hello</p></div>");
+    const { html } = renderTree(["div", ["p", "hello"]]);
+    expect(html).toBe("<div><p>hello</p></div>");
   });
 });
 
 describe("three arguments", () => {
   test("tag, props, text", () => {
-    const { root } = renderTree(["div", { className: "bar" }, "hello"]);
-    expect(root.innerHTML).toBe('<div class="bar">hello</div>');
+    const { html } = renderTree(["div", { className: "bar" }, "hello"]);
+    expect(html).toBe('<div class="bar">hello</div>');
   });
 
   test.todo("tag, props, child");
