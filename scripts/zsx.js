@@ -1,10 +1,5 @@
 import React from "react";
 
-/* goal
-['div', { className: 'bar' },
-  ['p', 'hello world']]
-*/
-
 const zsx = node => {
   // if the wrong type of information, throw an error
   if (!Array.isArray(node) || !node.length) {

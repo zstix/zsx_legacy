@@ -1,6 +1,25 @@
 import zsx from "../scripts/zsx";
 import ReactDOM from "react-dom";
 
+/* goal
+['div', { className: 'bar' },
+  ['p', 'hello world']]
+
+["div", [
+  ["h1", { className: "foo" }, `Hello, ${name}`],
+  ["p", "this is neat"]
+]];
+*/
+
+// Helper function to make tests simpler
+const renderTree = data => {
+  const root = document.createElement("div");
+  const tree = zsx(data);
+
+  ReactDOM.render(tree, root);
+  return { root };
+};
+
 describe("invalid arguments", () => {
   test("no arguments", () => {
     try {
@@ -34,10 +53,7 @@ describe("invalid arguments", () => {
 
 describe("one argument", () => {
   test("string", () => {
-    const root = document.createElement("div");
-    const tree = zsx(["hello"]);
-
-    ReactDOM.render(tree, root);
+    const { root } = renderTree(["hello"]);
     expect(root.innerHTML).toBe("hello");
   });
 
@@ -47,36 +63,24 @@ describe("one argument", () => {
 
 describe("two arguments", () => {
   test("tag and text", () => {
-    const root = document.createElement("div");
-    const tree = zsx(["p", "hello"]);
-
-    ReactDOM.render(tree, root);
+    const { root } = renderTree(["p", "hello"]);
     expect(root.innerHTML).toBe("<p>hello</p>");
   });
 
   test("tag and properties", () => {
-    const root = document.createElement("div");
-    const tree = zsx(["div", { className: "bar" }]);
-
-    ReactDOM.render(tree, root);
+    const { root } = renderTree(["div", { className: "bar" }]);
     expect(root.innerHTML).toBe('<div class="bar"></div>');
   });
 
   test("tag and child", () => {
-    const root = document.createElement("div");
-    const tree = zsx(["div", ["p", "hello"]]);
-
-    ReactDOM.render(tree, root);
+    const { root } = renderTree(["div", ["p", "hello"]]);
     expect(root.innerHTML).toBe("<div><p>hello</p></div>");
   });
 });
 
 describe("three arguments", () => {
   test("tag, props, text", () => {
-    const root = document.createElement("div");
-    const tree = zsx(["div", { className: "bar" }, "hello"]);
-
-    ReactDOM.render(tree, root);
+    const { root } = renderTree(["div", { className: "bar" }, "hello"]);
     expect(root.innerHTML).toBe('<div class="bar">hello</div>');
   });
 
