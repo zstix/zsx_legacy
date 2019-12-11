@@ -43,7 +43,8 @@ const ToDoList = items => ['ul', items.map(ToDoItem)];
 
 ## To Do
 
-* [ ] Get tests to pass
+* [x] Get tests to pass
+* [ ] Create todo tests
 * [ ] Add emmet-style class names
 * [ ] Create npm package
 * [ ] Write article

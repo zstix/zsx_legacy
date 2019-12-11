@@ -6,7 +6,6 @@ import React from "react";
 */
 
 const zsx = node => {
-  console.log("node", node);
   // if the wrong type of information, throw an error
   if (!Array.isArray(node) || !node.length) {
     throw new Error("zsx: array data structure expected");
@@ -17,7 +16,6 @@ const zsx = node => {
 
   // if one item in array
   if (node.length === 1) {
-    console.log("one");
     // if item is not the right type, throw an error
     if (!["string", "number"].includes(typeof componentOrTag)) {
       throw new Error(
@@ -36,14 +34,13 @@ const zsx = node => {
 
   // if two items in array
   if (node.length === 2) {
-    console.log("two");
     // if the second item is a string or number, shift params and recall
     if (["string", "number"].includes(typeof properties)) {
       return zsx([componentOrTag, null, properties]);
     }
     // if the second item is an array, shift params and spread them out (siblings)
     if (Array.isArray(properties)) {
-      return zsx([componentOrTag, null, ...properties]);
+      return zsx([componentOrTag, null, properties]);
     }
   }
 
@@ -54,11 +51,16 @@ const zsx = node => {
 
   // if more than three items (siblings) combine recursively
   if (node.length > 3) {
-    console.log("more");
     children = [...children, zsx(sibling)];
   }
 
-  console.log("just right");
+  // if three items in array
+  if (node.length === 3) {
+    // if the third is an array, create the element
+    if (Array.isArray(children) && children.length) {
+      children = zsx(children);
+    }
+  }
 
   // ensure properties is an object, even if it's empty
   properties = { ...properties };
@@ -68,7 +70,6 @@ const zsx = node => {
   // TODO: selectors
 
   const args = [componentOrTag, properties].concat(children);
-  console.log("createElement", args);
   return React.createElement.apply(React, args);
 };
 

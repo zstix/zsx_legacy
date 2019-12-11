@@ -62,7 +62,7 @@ describe("two arguments", () => {
     expect(root.innerHTML).toBe('<div class="bar"></div>');
   });
 
-  test.only("tag and child", () => {
+  test("tag and child", () => {
     const root = document.createElement("div");
     const tree = zsx(["div", ["p", "hello"]]);
 
@@ -91,4 +91,11 @@ describe("sibilings", () => {
 describe("tree composition", () => {
   test.todo("tag and component");
   test.todo("tag, props, component");
+});
+
+describe("selectors", () => {
+  test.todo("add a classname");
+  test.todo("add an id");
+  test.todo("add an id and a classname");
+  test.todo("nesting"); // Fancy
 });
