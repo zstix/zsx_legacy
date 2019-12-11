@@ -52,6 +52,24 @@ describe("invalid arguments", () => {
   });
 });
 
+// TODO: remove this
+describe("random", () => {
+  test("basic hello world", () => {
+    const name = "Zack";
+    const data = [
+      "div",
+      [
+        ["h1", { className: "foo" }, `Hello, ${name}`],
+        ["p", "this is neat"]
+      ]
+    ];
+    const { html } = renderTree(data);
+    expect(html).toBe(
+      '<div><h1 class="foo">Hello Zack</h1><p>this is neat</p></div>'
+    );
+  });
+});
+
 describe("one argument", () => {
   test("string", () => {
     const { html } = renderTree(["hello"]);
