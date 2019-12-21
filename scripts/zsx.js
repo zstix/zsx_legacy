@@ -46,6 +46,7 @@ const zsx = node => {
 
   // if more than three items (siblings) combine recursively
   if (node.length > 3) {
+    // TODO: fix this
     children = [...children, zsx(sibling)];
   }
 

@@ -89,16 +89,43 @@ describe("three arguments", () => {
     expect(html).toBe('<div class="bar">hello</div>');
   });
 
-  test.todo("tag, props, child");
+  test("tag, props, child", () => {
+    const { html } = renderTree([
+      "div",
+      { "data-role": "hello" },
+      ["p", "hello"]
+    ]);
+    expect(html).toBe('<div data-role="hello"><p>hello</p></div>');
+  });
 });
 
 describe("sibilings", () => {
-  test.todo("tag and siblings");
-  test.todo("tag, props, siblings");
+  test("tag, props, siblings", () => {
+    const { html } = renderTree([
+      "div",
+      { className: "bar" },
+      ["span", "foo"],
+      ["span", "bar"]
+    ]);
+    expect(html).toBe(
+      '<div class="bar"><span>foo</span><span>bar</span></div>'
+    );
+  });
 });
 
 describe("tree composition", () => {
-  test.todo("tag and component");
+  test("tag and component", () => {
+    const component = ["p", "hello"];
+    const data = ["div", component];
+
+    const root = document.createElement("div");
+    const tree = zsx(data);
+
+    ReactDOM.render(tree, root);
+    const html = root.innerHTML;
+    expect(html).toBe("<div><p>hello</p></div>");
+  });
+
   test.todo("tag, props, component");
 });
 
