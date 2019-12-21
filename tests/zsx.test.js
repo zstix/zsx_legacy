@@ -17,9 +17,6 @@ const renderTree = data => {
     const root = document.createElement("div");
     const tree = zsx(data);
 
-    console.log("data", data);
-    console.log("tree", tree);
-
     ReactDOM.render(tree, root);
     const html = root.innerHTML;
     return { root, html };
@@ -113,7 +110,7 @@ describe("selectors", () => {
 });
 
 describe("random", () => {
-  test.only("basic hello world", () => {
+  test("basic hello world", () => {
     const name = "Zack";
     const data = [
       "div",

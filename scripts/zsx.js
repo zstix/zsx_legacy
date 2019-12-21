@@ -30,13 +30,12 @@ const zsx = node => {
   // if two items in array
   if (node.length === 2) {
     // if the second item is a string or a number shift params and recall
-    if (["string", "number"].includes(typeof properties)) {
+    // do the same for an array (handled below)
+    if (
+      ["string", "number"].includes(typeof properties) ||
+      Array.isArray(properties)
+    ) {
       return zsx([componentOrTag, null, properties]);
-    }
-    // if the second item is an array, create a tree for it
-    if (Array.isArray(properties)) {
-      children = zsx(...properties);
-      properties = null;
     }
   }
 
@@ -52,9 +51,15 @@ const zsx = node => {
 
   // if three items in array
   if (node.length === 3) {
-    // if the third is an array, create the element
+    // if the third is an array
     if (Array.isArray(children) && children.length) {
-      children = zsx(children);
+      // if the array is one level deep, make a component
+      if (!Array.isArray(children[0])) {
+        children = zsx(children);
+      } else {
+        // otherwise, it's a nested array, build a tree
+        children = children.reduce((acc, node) => [...acc, zsx(node)], []);
+      }
     }
   }
 
