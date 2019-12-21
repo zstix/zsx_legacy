@@ -9,7 +9,4 @@ const App = name => [
   ]
 ];
 
-const root = document.getElementById("root");
-const tree = zsx(App("Zack"));
-
-ReactDOM.render(tree, root);
+ReactDOM.render(zsx(App("Zack")), document.getElementById("root"));
