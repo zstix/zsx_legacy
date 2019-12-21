@@ -29,13 +29,14 @@ const zsx = node => {
 
   // if two items in array
   if (node.length === 2) {
-    // if the second item is a string or number, shift params and recall
+    // if the second item is a string or a number shift params and recall
     if (["string", "number"].includes(typeof properties)) {
       return zsx([componentOrTag, null, properties]);
     }
-    // if the second item is an array, shift params and spread them out (siblings)
+    // if the second item is an array, create a tree for it
     if (Array.isArray(properties)) {
-      return zsx([componentOrTag, null, properties]);
+      children = zsx(...properties);
+      properties = null;
     }
   }
 
@@ -64,8 +65,12 @@ const zsx = node => {
 
   // TODO: selectors
 
-  const args = [componentOrTag, properties].concat(children);
-  return React.createElement.apply(React, args);
+  try {
+    const args = [componentOrTag, properties].concat(children);
+    return React.createElement.apply(React, args);
+  } catch (e) {
+    throw new Error(`zsx: error creating component: ${e}`);
+  }
 };
 
 export default zsx;
