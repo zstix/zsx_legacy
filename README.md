@@ -1,8 +1,8 @@
-JSX aint great.
+JSX ain't great.
 
 ## The Problem
 
-JSX is a fine solution to templating, but it comes with some drawbacks. One of the main arguments for using JSX is that it looks like regular HTML and is therefore easier to reason about when making web applications. However, as modern apps have gotten more complex, the implimentation of JSX has become more and more divergent of HTML. Some issues that I run into inculde:
+JSX is a fine solution to templating, but it comes with some drawbacks. One of the main arguments for using JSX is that it looks like regular HTML and is therefore easier to visualize page structure when building web applications. However, as modern apps have gotten more complex, the implimentation of JSX has become more and more divergent of HTML. Some issues that I run into inculde:
 
 * Context switching
 * Extra steps needed for manupulation
@@ -33,9 +33,9 @@ One possible solution, that I am attempting to explore is an alternative to JSX 
 * Clean an compact syntax
 
 ```javascript
-const ToDoItem = item => ['li',
-  ['input', { type='checkbox', checked=item.checked}],
-  ['span.desc', item.description]
+const ToDoItem = ({ chexked, description }) => ['li',
+  ['input', { type='checkbox', checked }],
+  ['span.desc', description]
 ];
 
 const ToDoList = items => ['ul', items.map(ToDoItem)];
