@@ -13,7 +13,7 @@ JSX is a fine solution to templating, but it comes with some drawbacks. One of t
 const ToDoItem = ({ checked, description }) => (
   <li>
     <input type="checkbox" checked={checked} />
-    <span className="todo-desc">{description}</span>
+    <span className="desc">{description}</span>
   </li>
 );
 
@@ -33,7 +33,7 @@ One possible solution, that I am attempting to explore is an alternative to JSX 
 * Clean an compact syntax
 
 ```javascript
-const ToDoItem = ({ chexked, description }) => ['li',
+const ToDoItem = ({ checked, description }) => ['li',
   ['input', { type='checkbox', checked }],
   ['span.desc', description]
 ];
