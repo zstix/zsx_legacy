@@ -10,18 +10,18 @@ JSX is a fine solution to templating, but it comes with some drawbacks. One of t
 * Verbose and cluttered syntax
 
 ```jsx
-const ToDoItem = item => (
+const ToDoItem = ({ checked, description }) => (
   <li>
-    <input type="checkbox" checked={item.checked} />
-    <span className="todo-desc">{item.description}</span>
+    <input type="checkbox" checked={checked} />
+    <span className="todo-desc">{description}</span>
   </li>
 );
 
-const ToDoList = items => {
+const ToDoList = items => (
   <ul>
     {items.map(item => <ToDo item={item} />}
   </ul>
-}
+)
 ```
 
 ## A Possible Solution
