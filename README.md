@@ -1,3 +1,9 @@
+## No Longer Maintained
+
+As much as I would like to continue on this project, I no longer have the time. Fortunately, there is [Hyperscript Helpers](https://github.com/ohanhi/hyperscript-helpers) which is a fairly close version of what I had in mind.
+
+---
+
 JSX ain't great.
 
 ## The Problem
